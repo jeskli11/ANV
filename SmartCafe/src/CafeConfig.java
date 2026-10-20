@@ -1,5 +1,5 @@
 public class CafeConfig {
-    private static final String CAFE_NAME = "Smart Cafe";
+    private static final String CAFE_NAME = "Smart Café";
     private static CafeConfig instance;
 
     private CafeConfig() {
