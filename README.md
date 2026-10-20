@@ -1,59 +1,58 @@
 # SmartCafe – NTI/ANV
 
-Semestrální projekt v rámci předmětu **Architektonické a návrhové vzory (NTI/ANV)**. Jedná se o celistvý systém pro správu kavárny, na kterém jsou v průběhu cvičení postupně aplikovány a demonstrovány různé návrhové vzory.
+Semestrální projekt pro předmět **Architektonické a návrhové vzory (NTI/ANV)**. Projekt demonstruje návrhové vzory Singleton, Factory a Builder na jednoduchém příkladu kavárny.
 
----
+## Použité technologie
 
-## 🚀 Použité technologie
+- **Jazyk:** Java
+- **Testy:** JUnit 4.13.1
+- **IDE:** IntelliJ IDEA
+- **Build nástroj:** projekt neobsahuje Maven ani Gradle; zdrojové a testovací složky a závislost JUnit jsou nastavené v modulu IntelliJ IDEA.
 
-* **Jazyk:** Java
-* **Testovací rámec:** JUnit 5
-* **Sestavovací prostředí / IDE:** IntelliJ IDEA
+## Implementované návrhové vzory
 
----
+### Singleton – `CafeConfig`
 
-## 🛠️ Implementované návrhové vzory
+`CafeConfig` poskytuje jedinou sdílenou instanci konfigurace a název kavárny `Smart Café`. Vzor demonstruje `Main` a ověřuje `CafeConfigTest`.
 
-### 1. Singleton (Jedináček)
-* **Třída:** `CafeConfig`
-* **Popis:** Zajišťuje existenci právě jedné instance globální konfigurace kavárny v rámci celé aplikace a poskytuje k ní jednotný přístupový bod.
-* **Využití:** Načtení a předávání globálního nastavení kavárny (např. název, otevírací doba, kapacita).
-* **Ukázka:** Metoda je demonstrativně volána v `Main.java`.
-* **Testy:** Funkcionalita je pokryta jednotkovými testy v `CafeConfigTest.java`.
+### Factory – `DrinkFactory`
 
----
+`DrinkFactory.createDrink(...)` vytváří čaj nebo kávu podle názvu nápoje. Nepodporovaný typ nápoje vyvolá `IllegalArgumentException`. Vzor používá `Main` a ověřuje `DrinkFactoryTest`.
 
-## 📂 Struktura projektu
+### Builder – `CustomDrink`
+
+`CustomDrink.Builder` sestavuje vlastní nápoj z podporovaného základu (`tea` nebo `coffee`) a volitelných přísad `milk()`, `sugar()` a `caramel()`. Nepodporovaný základ skončí při vytvoření textového popisu nápoje výjimkou z `DrinkFactory`. Nepodporované přísady, například `pancake()`, nejsou metodami builderu, a proto je nelze použít v Java kódu. Vzor demonstruje `Main` a ověřuje `CustomDrinkTest`.
+
+## Struktura projektu
 
 ```text
-SmartCafe/
-├── src/
-│   ├── CafeConfig.java      # Třída uchovávající konfiguraci (Singleton)
-│   └── Main.java            # Hlavní třída pro demonstraci funkcionality
-├── test/
-│   └── CafeConfigTest.java  # Jednotkové testy třídy CafeConfig
-├── SmartCafe.iml
-└── README.md
+ANV/
+├── README.md
+└── SmartCafe/
+    ├── SmartCafe.iml
+    ├── src/
+    │   ├── CafeConfig.java
+    │   ├── Coffee.java
+    │   ├── CustomDrink.java
+    │   ├── Drink.java
+    │   ├── DrinkFactory.java
+    │   ├── Main.java
+    │   └── Tea.java
+    └── test/
+        ├── CafeConfigTest.java
+        ├── CustomDrinkTest.java
+        └── DrinkFactoryTest.java
 ```
 
----
+## Požadavky a spuštění
 
-## 🧪 Jak spustit aplikaci a testy
+- JDK nastavené v IntelliJ IDEA.
+- IntelliJ IDEA s otevřeným modulem `SmartCafe/`; složka `src` musí být označena jako zdrojová a `test` jako testovací.
+- JUnit 4.13.1 a Hamcrest 1.3 dostupné v testovací classpath modulu (v projektu jsou nastavené jako knihovna IntelliJ IDEA).
 
-### Požadavky
-* Java Development Kit (JDK) 17 nebo novější.
-* Přidaná závislost na **JUnit 5** v classpath (případně spravováno přes vývojové prostředí).
+Spusťte aplikaci spuštěním metody `main` ve třídě `SmartCafe/src/Main.java`. Testy lze spustit jednotlivě nebo jako sadu z adresáře `SmartCafe/test`.
 
-### Spuštění aplikace
-1. Otevřete projekt ve svém IDE (např. IntelliJ IDEA).
-2. Spusťte třídu `src/Main.java` (metoda `main`).
+## Autor
 
-### Spuštění testů
-1. Ujistěte se, že složka `test` je v IDE označena jako **Test Sources Root**.
-2. Spusťte testovací třídu `test/CafeConfigTest.java` (např. pomocí klávesové zkratky `Ctrl + Shift + F10` / `Cmd + Shift + R`).
-
----
-
-## 👤 Autor
-* **Jméno:** Jan Skrbek
-* **Obor / Ročník:** Informační technologie – IS, 2026/27
+- **Jméno:** Jan Skrbek
+- **Obor / ročník:** Informační technologie – IS, 2026/27
