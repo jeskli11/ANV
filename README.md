@@ -1,6 +1,6 @@
 # SmartCafe – NTI/ANV
 
-Semestrální projekt pro předmět **Architektonické a návrhové vzory (NTI/ANV)**. Projekt demonstruje návrhové vzory Singleton, Factory a Builder na jednoduchém příkladu kavárny.
+Semestrální projekt pro předmět **Architektonické a návrhové vzory (NTI/ANV)**. Projekt demonstruje návrhové vzory Singleton, Factory, Builder a Observer na jednoduchém příkladu kavárny.
 
 ## Použité technologie
 
@@ -23,6 +23,10 @@ Semestrální projekt pro předmět **Architektonické a návrhové vzory (NTI/A
 
 `CustomDrink.Builder` sestavuje vlastní nápoj z podporovaného základu (`tea` nebo `coffee`) a volitelných přísad `milk()`, `sugar()` a `caramel()`. Nepodporovaný základ skončí při vytvoření textového popisu nápoje výjimkou z `DrinkFactory`. Nepodporované přísady, například `pancake()`, nejsou metodami builderu, a proto je nelze použít v Java kódu. Vzor demonstruje `Main` a ověřuje `CustomDrinkTest`.
 
+### Observer – `OrderSubject`, `Observer` a `EmployeeObserver`
+
+`OrderSubject` spravuje seznam pozorovatelů a metodou `notifyAll(...)` jim předává stav objednávky. `EmployeeObserver` představuje zaměstnance, který po oznámení vypíše zprávu o objednávce. Vzor demonstruje `Main`, kde jsou o dokončení nápoje informováni barista a číšník, a ověřuje `ObserverTest`.
+
 ## Struktura projektu
 
 ```text
@@ -36,12 +40,16 @@ ANV/
     │   ├── CustomDrink.java
     │   ├── Drink.java
     │   ├── DrinkFactory.java
+    │   ├── EmployeeObserver.java
     │   ├── Main.java
+    │   ├── Observer.java
+    │   ├── OrderSubject.java
     │   └── Tea.java
     └── test/
         ├── CafeConfigTest.java
         ├── CustomDrinkTest.java
-        └── DrinkFactoryTest.java
+        ├── DrinkFactoryTest.java
+        └── ObserverTest.java
 ```
 
 ## Požadavky a spuštění

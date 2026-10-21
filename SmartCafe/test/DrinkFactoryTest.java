@@ -10,7 +10,7 @@ public class DrinkFactoryTest {
         Drink drink = DrinkFactory.createDrink("tea");
 
         assertTrue("Expected createDrink(\"tea\") to return Tea.", drink instanceof Tea);
-        assertServes(drink, "Serving Tea");
+        assertServes(drink, "Ordered Tea");
     }
 
     @Test
@@ -18,7 +18,7 @@ public class DrinkFactoryTest {
         Drink drink = DrinkFactory.createDrink("coffee");
 
         assertTrue("Expected createDrink(\"coffee\") to return Coffee.", drink instanceof Coffee);
-        assertServes(drink, "Serving Coffee");
+        assertServes(drink, "Ordered Coffee");
     }
 
     @Test

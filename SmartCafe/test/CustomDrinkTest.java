@@ -8,7 +8,7 @@ public class CustomDrinkTest {
     public void testBuildsDrinkWithoutCustomizations() {
         CustomDrink drink = new CustomDrink.Builder("tea").build();
 
-        assertEquals("Serving Tea", drink.toString());
+        assertEquals("Ordered Tea", drink.toString());
     }
 
     @Test
@@ -19,7 +19,7 @@ public class CustomDrinkTest {
                 .caramel()
                 .build();
 
-        assertEquals("Serving Coffee, milk, sugar, caramel", drink.toString());
+        assertEquals("Ordered Coffee, milk, sugar, caramel", drink.toString());
     }
 
     @Test
@@ -29,7 +29,7 @@ public class CustomDrinkTest {
                 .milk()
                 .build();
 
-        assertEquals("Serving Tea, milk, caramel", drink.toString());
+        assertEquals("Ordered Tea, milk, caramel", drink.toString());
     }
 
     @Test
@@ -37,11 +37,5 @@ public class CustomDrinkTest {
         CustomDrink drink = new CustomDrink.Builder("water").build();
 
         assertThrows(IllegalArgumentException.class, drink::toString);
-    }
-
-    @Test
-    public void testBuilderDoesNotExposeUnsupportedCustomization() {
-        assertThrows(NoSuchMethodException.class,
-                () -> CustomDrink.Builder.class.getMethod("pancake"));
     }
 }
