@@ -1,6 +1,6 @@
 # SmartCafe – NTI/ANV
 
-Semestrální projekt pro předmět **Architektonické a návrhové vzory (NTI/ANV)**. Projekt demonstruje návrhové vzory Singleton, Factory, Builder a Observer na jednoduchém příkladu kavárny.
+Semestrální projekt pro předmět **Architektonické a návrhové vzory (NTI/ANV)**. Projekt demonstruje návrhové vzory Singleton, Factory, Builder, Observer a Strategy na jednoduchém příkladu kavárny.
 
 ## Použité technologie
 
@@ -27,6 +27,10 @@ Semestrální projekt pro předmět **Architektonické a návrhové vzory (NTI/A
 
 `OrderSubject` spravuje seznam pozorovatelů a metodou `notifyAll(...)` jim předává stav objednávky. `EmployeeObserver` představuje zaměstnance, který po oznámení vypíše zprávu o objednávce. Vzor demonstruje `Main`, kde jsou o dokončení nápoje informováni barista a číšník, a ověřuje `ObserverTest`.
 
+### Strategy – `PaymentStrategy`, `Checkout` a platební strategie
+
+`PaymentStrategy` definuje společné rozhraní pro platby. Implementují ho `CreditCardPayment`, `CashPayment` a `QRCodePayment`. `Checkout` zpracuje platbu podle aktuálně nastavené strategie; tu lze změnit metodou `setStrategy(...)`. `Main` demonstruje nejprve platbu kartou a poté hotově. Strategie a jejich použití v pokladně ověřuje `PaymentStrategyTest`.
+
 ## Struktura projektu
 
 ```text
@@ -36,7 +40,10 @@ ANV/
     ├── SmartCafe.iml
     ├── src/
     │   ├── CafeConfig.java
+    │   ├── CashPayment.java
+    │   ├── Checkout.java
     │   ├── Coffee.java
+    │   ├── CreditCardPayment.java
     │   ├── CustomDrink.java
     │   ├── Drink.java
     │   ├── DrinkFactory.java
@@ -44,12 +51,15 @@ ANV/
     │   ├── Main.java
     │   ├── Observer.java
     │   ├── OrderSubject.java
+    │   ├── PaymentStrategy.java
+    │   ├── QRCodePayment.java
     │   └── Tea.java
     └── test/
         ├── CafeConfigTest.java
         ├── CustomDrinkTest.java
         ├── DrinkFactoryTest.java
-        └── ObserverTest.java
+        ├── ObserverTest.java
+        └── PaymentStrategyTest.java
 ```
 
 ## Požadavky a spuštění
