@@ -31,6 +31,10 @@ Semestrální projekt pro předmět **Architektonické a návrhové vzory (NTI/A
 
 `PaymentStrategy` definuje společné rozhraní pro platby. Implementují ho `CreditCardPayment`, `CashPayment` a `QRCodePayment`. `Checkout` zpracuje platbu podle aktuálně nastavené strategie; tu lze změnit metodou `setStrategy(...)`. `Main` demonstruje nejprve platbu kartou a poté hotově. Strategie a jejich použití v pokladně ověřuje `PaymentStrategyTest`.
 
+### Command – `Command`, `OrderCommand` a `PaymentCommand`
+
+`Command` definuje jednotné rozhraní `execute()`. `OrderCommand` při spuštění oznamuje text objednávky přes `OrderSubject`, zatímco `PaymentCommand` zpožděně provede platbu přes aktuálně nastavenou strategii a výsledek předá pozorovatelům. Chování obou příkazů ověřuje `CommandTest`.
+
 ## Struktura projektu
 
 ```text
@@ -57,6 +61,7 @@ ANV/
     └── test/
         ├── CafeConfigTest.java
         ├── CustomDrinkTest.java
+        ├── CommandTest.java
         ├── DrinkFactoryTest.java
         ├── ObserverTest.java
         └── PaymentStrategyTest.java

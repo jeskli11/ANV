@@ -1,22 +1,48 @@
 public class Main {
     public static void main(String[] args) {
-        OrderSubject order = new OrderSubject();
-
         EmployeeObserver waiter = new EmployeeObserver("Waiter");
         EmployeeObserver barista = new EmployeeObserver("Barista");
 
-        order.addObserver(waiter);
+        OrderSubject order = new OrderSubject();
         order.addObserver(barista);
-
-        CustomDrink customDrink = new CustomDrink.Builder("coffee").milk().sugar().build();
-        order.notifyAll(customDrink +" in "+CafeConfig.getInstance().getCafeName());
 
         OrderSubject payment = new OrderSubject();
         payment.addObserver(waiter);
 
+        CustomDrink coffee = new CustomDrink.Builder("coffee").milk().build();
+        CustomDrink tea = new CustomDrink.Builder("tea").sugar().build();
+
+        String cafeName = CafeConfig.getInstance().getCafeName();
+
+        Command coffeeOrder = new OrderCommand(
+                order,
+                coffee + " in " + cafeName
+        );
+
+        Command teaOrder = new OrderCommand(
+                order,
+                tea + " in " + cafeName
+        );
+
+        coffeeOrder.execute();
+        teaOrder.execute();
+
         Checkout checkout = new Checkout(new CreditCardPayment());
-        payment.notifyAll(checkout.processPayment(150, 4));
+        Command payByCard = new PaymentCommand(
+                payment,
+                checkout,
+                150,
+                4
+        );
+        payByCard.execute();
+
         checkout.setStrategy(new CashPayment());
-        payment.notifyAll(checkout.processPayment(100, 2));
+        Command payByCash = new PaymentCommand(
+                payment,
+                checkout,
+                100,
+                2
+        );
+        payByCash.execute();
     }
 }
