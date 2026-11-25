@@ -9,8 +9,16 @@ public class Main {
         OrderSubject payment = new OrderSubject();
         payment.addObserver(waiter);
 
-        CustomDrink coffee = new CustomDrink.Builder("coffee").milk().build();
-        CustomDrink tea = new CustomDrink.Builder("tea").sugar().build();
+        CustomDrink coffee = new CustomDrink.Builder("coffee")
+                .milk()
+                .caramel()
+                .build();
+        coffee = new OwnMugDecorator(new ToGoDecorator(coffee));
+
+        CustomDrink tea = new CustomDrink.Builder("tea")
+                .sugar()
+                .build();
+        tea = new OwnMugDecorator(tea);
 
         String cafeName = CafeConfig.getInstance().getCafeName();
 
