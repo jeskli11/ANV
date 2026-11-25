@@ -9,6 +9,15 @@ public class CustomDrink {
         this.caramel = b.caramel;
     }
 
+    protected CustomDrink() {}
+
+    public String toString() {
+        return DrinkFactory.createDrink(base).serve()
+                + (milk ? ", milk" : "")
+                + (sugar ? ", sugar" : "")
+                + (caramel ? ", caramel" : "");
+    }
+
     public static class Builder {
         private String base;
         private boolean milk, sugar, caramel;
@@ -35,12 +44,5 @@ public class CustomDrink {
         public CustomDrink build() {
             return new CustomDrink(this);
         }
-    }
-
-    public String toString() {
-        return DrinkFactory.createDrink(base).serve()
-                + (milk ? ", milk" : "")
-                + (sugar ? ", sugar" : "")
-                + (caramel ? ", caramel" : "");
     }
 }

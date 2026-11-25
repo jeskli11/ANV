@@ -1,6 +1,6 @@
 # SmartCafe – NTI/ANV
 
-Semestrální projekt pro předmět **Architektonické a návrhové vzory (NTI/ANV)**. Projekt demonstruje návrhové vzory Singleton, Factory, Builder, Observer a Strategy na jednoduchém příkladu kavárny.
+Semestrální projekt pro předmět **Architektonické a návrhové vzory (NTI/ANV)**. Projekt demonstruje návrhové vzory Singleton, Factory, Builder, Decorator, Observer, Strategy a Command na jednoduchém příkladu kavárny.
 
 ## Použité technologie
 
@@ -22,6 +22,10 @@ Semestrální projekt pro předmět **Architektonické a návrhové vzory (NTI/A
 ### Builder – `CustomDrink`
 
 `CustomDrink.Builder` sestavuje vlastní nápoj z podporovaného základu (`tea` nebo `coffee`) a volitelných přísad `milk()`, `sugar()` a `caramel()`. Nepodporovaný základ skončí při vytvoření textového popisu nápoje výjimkou z `DrinkFactory`. Nepodporované přísady, například `pancake()`, nejsou metodami builderu, a proto je nelze použít v Java kódu. Vzor demonstruje `Main` a ověřuje `CustomDrinkTest`.
+
+### Decorator – `CustomDrinkDecorator`, `ToGoDecorator` a `OwnMugDecorator`
+
+Dekorátory obalují `CustomDrink` a přidávají k jeho popisu způsob servírování: `ToGoDecorator` přidá označení „to-go“ a `OwnMugDecorator` označení „own mug“. Lze je kombinovat a pořadí obalení určuje pořadí označení. Použití ukazuje `Main` a testuje `DrinkDecoratorTest`.
 
 ### Observer – `OrderSubject`, `Observer` a `EmployeeObserver`
 
@@ -47,21 +51,28 @@ ANV/
     │   ├── CashPayment.java
     │   ├── Checkout.java
     │   ├── Coffee.java
+    │   ├── Command.java
     │   ├── CreditCardPayment.java
     │   ├── CustomDrink.java
+    │   ├── CustomDrinkDecorator.java
     │   ├── Drink.java
     │   ├── DrinkFactory.java
     │   ├── EmployeeObserver.java
     │   ├── Main.java
     │   ├── Observer.java
+    │   ├── OrderCommand.java
     │   ├── OrderSubject.java
+    │   ├── OwnMugDecorator.java
+    │   ├── PaymentCommand.java
     │   ├── PaymentStrategy.java
     │   ├── QRCodePayment.java
-    │   └── Tea.java
+    │   ├── Tea.java
+    │   └── ToGoDecorator.java
     └── test/
         ├── CafeConfigTest.java
-        ├── CustomDrinkTest.java
         ├── CommandTest.java
+        ├── CustomDrinkTest.java
+        ├── DrinkDecoratorTest.java
         ├── DrinkFactoryTest.java
         ├── ObserverTest.java
         └── PaymentStrategyTest.java
